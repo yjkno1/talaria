@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basename" value="/WEB-INF/messages/messages" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+	<import resource="datasource-context.xml" />
+	
+	<context:component-scan base-package="com.talaria" />
+	
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean"
+		p:resourceLoaderPath="classpath:/META-INF/templates/email" />
+
+	<bean id="templateBuilder" class="com.iotmaker.busan.web.util.template.VelocityTemplateBuilder"
+		p:velocityEngine-ref="velocityEngine" p:encoding="UTF-8" />
+
+<!-- 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:username="canaria.adm@gmail.com" p:password="wnsxhtm1212">
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.host">smtp.gmail.com</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.port">587</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="alertMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:username="canaria.alert@hanmail.net" p:password="zkskfldk2@">
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.host">smtp.daum.net</prop>
+				<prop key="mail.smtp.port">465</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<util:properties id="sendMailInfo">
+		<prop key="address_dbm">test@tgrape.com</prop>
+		<prop key="template_dbm">template.html</prop>
+		<prop key="noti_template">noti_template.html</prop>
+		<prop key="eventNoti_template">eventNoti_template.html</prop>
+		<prop key="account_template">account_template.html</prop>
+		<prop key="signup_template">signup_template.html</prop>
+		<prop key="domain_dbm">http://</prop>
+		<prop key="subject_dbm">title</prop>
+	</util:properties>
+ -->
+
+</beans>
