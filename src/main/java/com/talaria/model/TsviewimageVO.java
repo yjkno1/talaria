@@ -1,8 +1,9 @@
 package com.talaria.model;
 
-import lombok.Data;
-
 import java.sql.Timestamp;
+import java.util.List;
+
+import lombok.Data;
 
 /**
  * Created by Davis on 2017-05-22.
@@ -22,4 +23,5 @@ public class TsviewimageVO { // Table : tsviewimages
     private Timestamp createTime;
     private Timestamp updateTime;
 
+    private List<TsviewimageTagVO> tsviewimageTagList;
 }
